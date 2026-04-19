@@ -5,6 +5,7 @@ import { app } from '../src/app';
 
 async function seedTestData() {
   await prisma.taskCompletion.deleteMany();
+  await prisma.enrollment.deleteMany();
   await prisma.task.deleteMany();
   await prisma.course.deleteMany();
   await prisma.user.deleteMany();

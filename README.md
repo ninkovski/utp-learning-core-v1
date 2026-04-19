@@ -3,7 +3,7 @@
 Base técnica del proyecto para la prueba UTP.
 
 ## Estado actual
-- Fase: `feature/2_auth-courses`
+- Fase: `feature/3_enrollments`
 - Stack base: Node.js + TypeScript + Express + Prisma + SQLite
 - Incluye: lint, tests, manejo central de errores, healthcheck, auth JWT, cursos seed
 
@@ -55,9 +55,10 @@ En PowerShell con restricción de scripts, usar `npm.cmd`:
 - `prisma` schema, migraciones y seed
 - `tests` pruebas unitarias/integración
 
-## Próxima fase
--- `feature/3_enrollments`
-  - `GET /me/enrollments`
-  - `POST /me/enrollments/{courseId}`
-  - `DELETE /me/enrollments/{courseId}`
-  - regla anti-duplicado
+## Fase 3: Enrollments + Tasks Progress (v0.4.0) 🔨
+- `GET /api/me/enrollments` → cursos donde estoy inscrito
+- `POST /api/me/enrollments/{courseId}` → inscribirse (sin duplicados)
+- `DELETE /api/me/enrollments/{courseId}` → retirarse
+- `GET /api/me/tasks?courseId={id}` → tareas con estado por usuario
+- `POST /api/me/tasks/{taskId}/complete` → marcar completada
+- `DELETE /api/me/tasks/{taskId}/complete` → desmarcar completada

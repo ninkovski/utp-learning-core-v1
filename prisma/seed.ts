@@ -2,6 +2,7 @@ import { prisma } from '../src/lib/prisma';
 
 async function main() {
   await prisma.taskCompletion.deleteMany();
+  await prisma.enrollment.deleteMany();
   await prisma.task.deleteMany();
   await prisma.course.deleteMany();
   await prisma.user.deleteMany();

@@ -72,7 +72,7 @@ Evidencia:
 - Build TypeScript en verde.
 
 ## v0.4.0 - Enrollments + Tasks Progress
-Estado: Planned
+Estado: In Progress
 
 Objetivo:
 - Completar reglas de negocio por usuario autenticado.
@@ -83,9 +83,9 @@ Entregables:
 - Marcar/desmarcar completado.
 
 Checklist de salida:
-- [ ] Sin duplicidad de inscripcion.
-- [ ] Estado por usuario aislado.
-- [ ] Endpoints protegidos bajo `/me/**`.
+- [x] Sin duplicidad de inscripcion.
+- [x] Estado por usuario aislado.
+- [x] Endpoints protegidos bajo `/me/**`.
 
 ## v0.5.0 - Quality Gate
 Estado: Planned
