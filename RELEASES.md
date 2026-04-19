@@ -108,7 +108,7 @@ Evidencia:
 - Verificación local: test, lint y build en verde.
 
 ## v0.6.0 - Cloud Delivery
-Estado: Planned
+Estado: In Progress
 
 Objetivo:
 - Entrega publica para pruebas tecnicas.
@@ -119,6 +119,11 @@ Entregables:
 - URL publica de validacion.
 
 Checklist de salida:
-- [ ] Build y test automaticos en CI.
-- [ ] Deploy automatizado por branch/tag.
+- [x] Build y test automaticos en CI.
+- [x] Deploy automatizado por branch/tag.
 - [ ] URL final documentada para evaluadores.
+
+Evidencia:
+- Workflow de despliegue en `.github/workflows/azure-main-deploy.yml`.
+- Trigger por push a `main`.
+- Versionado automático en producción vía `GET /api/health` -> `version`.

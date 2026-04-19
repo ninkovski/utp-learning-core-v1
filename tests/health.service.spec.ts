@@ -7,6 +7,7 @@ describe('HealthService', () => {
 
     expect(result.status).toBe('ok');
     expect(result.service).toBe('mini-lms-backend');
+    expect(result.version).toBeDefined();
     expect(result.timestamp).toBeDefined();
   });
 });

@@ -85,3 +85,26 @@ Resultado esperado:
 - tests en verde
 - lint sin errores
 - build TypeScript exitoso
+
+## Deploy continuo a Azure (main -> producción)
+
+Se agregó workflow de CI/CD en [azure-main-deploy.yml](.github/workflows/azure-main-deploy.yml).
+
+Comportamiento:
+- En cada push a `main` ejecuta: migrate (CI), lint, test y build.
+- Si todo pasa, despliega a Azure App Service.
+- En cada despliegue genera una versión única de producción en formato:
+	- `x.y.z-main.<run_number>`
+- Esa versión se expone en `GET /api/health` en el campo `version`.
+
+### Configuración requerida en GitHub
+- Repository Variable:
+	- `AZURE_WEBAPP_NAME` = nombre del App Service
+- Repository Secret:
+	- `AZURE_WEBAPP_PUBLISH_PROFILE` = contenido del publish profile descargado desde Azure
+
+### Validación post-deploy
+- Consultar `GET https://<tu-app>.azurewebsites.net/api/health`
+- Verificar:
+	- `status = ok`
+	- `version` actualizada respecto al despliegue anterior
