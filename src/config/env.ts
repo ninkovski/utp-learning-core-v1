@@ -13,10 +13,20 @@ function getEnvValue(key: 'NODE_ENV' | 'PORT' | 'JWT_SECRET' | 'DATABASE_URL', f
   return value;
 }
 
+function getDefaultDatabaseUrl(nodeEnv: string): string {
+  if (nodeEnv === 'production') {
+    return 'file:/home/site/data/dev.db';
+  }
+
+  return 'file:./dev.db';
+}
+
+const nodeEnv = getEnvValue('NODE_ENV', 'development');
+
 export const env = {
-  nodeEnv: getEnvValue('NODE_ENV', 'development'),
+  nodeEnv,
   port: Number(getEnvValue('PORT', '3000')),
   jwtSecret: getEnvValue('JWT_SECRET', 'dev-secret-change-in-production'),
-  databaseUrl: getEnvValue('DATABASE_URL', 'file:./dev.db'),
+  databaseUrl: getEnvValue('DATABASE_URL', getDefaultDatabaseUrl(nodeEnv)),
   appVersion: process.env.APP_VERSION ?? packageJson.version,
 };
