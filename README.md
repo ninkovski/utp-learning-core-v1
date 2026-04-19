@@ -91,11 +91,18 @@ Resultado esperado:
 Se agregó workflow de CI/CD en [azure-main-deploy.yml](.github/workflows/azure-main-deploy.yml).
 
 Comportamiento:
-- En cada push a `main` ejecuta: migrate (CI), lint, test y build.
+- En cada push a `main` ejecuta: lint, test y build.
 - Si todo pasa, despliega a Azure App Service.
 - En cada despliegue genera una versión única de producción en formato:
 	- `x.y.z-main.<run_number>`
 - Esa versión se expone en `GET /api/health` en el campo `version`.
+
+### SQLite temporal persistente para demo
+- La app usa Prisma con SQLite dentro del mismo App Service.
+- En `production`, el default de `DATABASE_URL` apunta a `/home/site/data/dev.db`.
+- Si el archivo no existe al arrancar, se copia una plantilla desde `prisma/dev.db`.
+- Esto sirve para una demo de pocos días sin base externa.
+- Si quieres garantizar persistencia, configura explícitamente `DATABASE_URL=file:/home/site/data/dev.db` en Azure App Settings.
 
 ### Configuración requerida en GitHub
 - Repository Variable:

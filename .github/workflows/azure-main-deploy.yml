@@ -26,9 +26,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Apply Prisma migrations (CI)
-        run: npm exec prisma migrate deploy
-
       - name: Lint
         run: npm run lint
 
