@@ -1,0 +1,54 @@
+name: Pause and resume Azure App Service
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Choose stop or start'
+        required: true
+        default: stop
+        type: choice
+        options:
+          - stop
+          - start
+  schedule:
+    - cron: '0 12 * * 3'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  stop:
+    if: github.event_name == 'workflow_dispatch' && inputs.action == 'stop'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_13F1C4655504464FAD482C966904E04E }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8F8E7A7FAF104E0B855542C1A67E4352 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_CAD1AF8D5C874B2EA201EF35BA78F76F }}
+
+      - name: Stop Azure Web App
+        uses: azure/CLI@v2
+        with:
+          inlineScript: |
+            az webapp stop --name utp-learning-core-v1 --resource-group ${{ vars.AZURE_RESOURCE_GROUP }}
+
+  start:
+    if: (github.event_name == 'workflow_dispatch' && inputs.action == 'start') || github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_13F1C4655504464FAD482C966904E04E }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8F8E7A7FAF104E0B855542C1A67E4352 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_CAD1AF8D5C874B2EA201EF35BA78F76F }}
+
+      - name: Start Azure Web App
+        uses: azure/CLI@v2
+        with:
+          inlineScript: |
+            az webapp start --name utp-learning-core-v1 --resource-group ${{ vars.AZURE_RESOURCE_GROUP }}
