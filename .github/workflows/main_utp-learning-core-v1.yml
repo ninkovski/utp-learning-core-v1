@@ -70,6 +70,9 @@ jobs:
     permissions:
       contents: read
       id-token: write
+    env:
+      AZURE_WEBAPP_NAME: utp-learning-core-v1
+      AZURE_RESOURCE_GROUP: utp-learning-core-v1_group
 
     steps:
       - name: Download artifact from build job
@@ -98,3 +101,29 @@ jobs:
           app-name: 'utp-learning-core-v1'
           slot-name: 'Production'
           package: deploy-package
+
+      - name: Configure Azure runtime settings
+        uses: azure/CLI@v2
+        with:
+          inlineScript: |
+            az webapp config appsettings set \
+              --name "$AZURE_WEBAPP_NAME" \
+              --resource-group "$AZURE_RESOURCE_GROUP" \
+              --settings NODE_ENV=production DATABASE_URL=file:/home/site/data/dev.db
+
+            az webapp config set \
+              --name "$AZURE_WEBAPP_NAME" \
+              --resource-group "$AZURE_RESOURCE_GROUP" \
+              --startup-file "npm start" \
+              --always-on true
+
+            az webapp config set \
+              --name "$AZURE_WEBAPP_NAME" \
+              --resource-group "$AZURE_RESOURCE_GROUP" \
+              --generic-configurations '{"healthCheckPath":"/api/health"}'
+
+      - name: Restart Azure Web App
+        uses: azure/CLI@v2
+        with:
+          inlineScript: |
+            az webapp restart --name "$AZURE_WEBAPP_NAME" --resource-group "$AZURE_RESOURCE_GROUP"
