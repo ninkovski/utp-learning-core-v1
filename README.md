@@ -40,10 +40,10 @@ En PowerShell con restricción de scripts, usar `npm.cmd`:
 - `GET /api/health` → healthcheck
 
 ### Fase 2: Auth + Courses (v0.3.0) 🔨
-- `POST /auth/login` → generar JWT
-- `GET /courses` → listar cursos
-- `GET /courses/{id}` → detalle curso
-- `/me/**` → protegido por JWT (validación `/me/**`)
+- `POST /api/auth/login` → generar JWT
+- `GET /api/courses` → listar cursos
+- `GET /api/courses/{id}` → detalle curso
+- `/api/me/**` → protegido por JWT
 
 ## Estructura base
 - `src/app.ts` configuración de middlewares y rutas
@@ -62,3 +62,26 @@ En PowerShell con restricción de scripts, usar `npm.cmd`:
 - `GET /api/me/tasks?courseId={id}` → tareas con estado por usuario
 - `POST /api/me/tasks/{taskId}/complete` → marcar completada
 - `DELETE /api/me/tasks/{taskId}/complete` → desmarcar completada
+
+## Quality Gate (v0.5.0) ✅
+
+### Suite obligatoria (3-5 tests)
+- `tests/me-enrollments-tasks.e2e.spec.ts` (flujo funcional)
+- `tests/quality-gate.e2e.spec.ts` (errores y validaciones)
+
+### Casos de error cubiertos
+- Login con payload inválido → `400`
+- `/api/me/**` con token inválido o ausente → `401`
+- `/api/me/tasks` sin `courseId` → `400`
+- `/api/me/tasks` sin inscripción previa → `403`
+- Inscripción a curso inexistente → `404`
+
+### Evidencia de ejecución local
+1. `npm.cmd test`
+2. `npm.cmd run lint`
+3. `npm.cmd run build`
+
+Resultado esperado:
+- tests en verde
+- lint sin errores
+- build TypeScript exitoso

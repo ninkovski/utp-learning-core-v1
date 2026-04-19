@@ -88,7 +88,7 @@ Checklist de salida:
 - [x] Endpoints protegidos bajo `/me/**`.
 
 ## v0.5.0 - Quality Gate
-Estado: Planned
+Estado: Completed ✅
 
 Objetivo:
 - Demostrar robustez funcional con pruebas.
@@ -98,9 +98,14 @@ Entregables:
 - README final de ejecucion.
 
 Checklist de salida:
-- [ ] Tests obligatorios en verde.
-- [ ] Casos de error cubiertos.
-- [ ] Evidencia de ejecucion incluida.
+- [x] Tests obligatorios en verde.
+- [x] Casos de error cubiertos.
+- [x] Evidencia de ejecucion incluida.
+
+Evidencia:
+- Suite obligatoria agregada en `tests/quality-gate.e2e.spec.ts`.
+- README final actualizado con ejecución y cobertura de errores.
+- Verificación local: test, lint y build en verde.
 
 ## v0.6.0 - Cloud Delivery
 Estado: Planned
