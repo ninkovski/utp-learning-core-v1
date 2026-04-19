@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      NODE_ENV: production
+      NODE_ENV: development
       DATABASE_URL: file:./dev.db
       APP_VERSION: ${{ github.run_number }}
 
