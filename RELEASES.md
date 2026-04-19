@@ -7,7 +7,7 @@
 - Rama de integración final: `main`
 
 ## v0.1.0 – Documentation Baseline
-Estado: Planned
+Estado: Completed ✅
 
 Objetivo:
 - Congelar alcance, historias y orden de implementación.
@@ -18,13 +18,13 @@ Entregables:
 - Matriz de trazabilidad HU → tareas → commits.
 
 Checklist de salida:
-- [ ] Alcance CORE validado.
-- [ ] Historias de usuario con criterios.
-- [ ] DoD documentado.
-- [ ] Riesgos y mitigaciones registradas.
+- [x] Alcance CORE validado.
+- [x] Historias de usuario con criterios.
+- [x] DoD documentado.
+- [x] Riesgos y mitigaciones registradas.
 
 ## v0.2.0 – Foundation
-Estado: Planned
+Estado: Completed ✅
 
 Objetivo:
 - Proyecto inicial ejecutable con arquitectura por capas.
@@ -35,25 +35,37 @@ Entregables:
 - Manejo centralizado de errores.
 
 Checklist de salida:
-- [ ] Aplicación levanta localmente.
-- [ ] Healthcheck disponible.
-- [ ] Error middleware activo.
+- [x] Aplicación levanta localmente.
+- [x] Healthcheck disponible.
+- [x] Error middleware activo.
+
+Avance implementado en `feature/1_foundation`:
+- Bootstrap Node.js + TypeScript + Express.
+- Configuración de ESLint, Prettier, Jest y Supertest.
+- Middleware centralizado de errores + 404.
+- Endpoint base `GET /` y `GET /api/health`.
+- Pruebas iniciales de healthcheck y not found.
+- 3 tests pasando (unit + integración).
 
 ## v0.3.0 – Auth + Courses
-Estado: Planned
+Estado: In Progress 🔨
+Rama: `feature/2_auth-courses`
 
 Objetivo:
 - Login JWT y endpoints públicos de cursos.
 
 Entregables:
+- Prisma + SQLite schema (usuarios/cursos/tareas)
+- Seed inicial de datos
 - `POST /auth/login`
 - `GET /courses`
 - `GET /courses/{id}`
-- Seed de usuarios/cursos/tareas.
+- JWT middleware para proteger `/me/**`
 
 Checklist de salida:
 - [ ] Token emitido para credenciales válidas.
-- [ ] Cursos seed disponibles.
+- [ ] Cursos seed disponibles (6–10).
+- [ ] Tareas seed por curso.
 - [ ] 401 y 404 consistentes.
 
 ## v0.4.0 – Enrollments + Tasks Progress
