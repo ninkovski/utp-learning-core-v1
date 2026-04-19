@@ -25,7 +25,11 @@ function getDefaultDatabaseUrl(nodeEnv: string): string {
   return 'file:./dev.db';
 }
 
-const nodeEnv = getEnvValue('NODE_ENV', 'development');
+function isAzureAppService(): boolean {
+  return Boolean(process.env.WEBSITE_SITE_NAME || process.env.WEBSITE_INSTANCE_ID);
+}
+
+const nodeEnv = getEnvValue('NODE_ENV', isAzureAppService() ? 'production' : 'development');
 
 export const env = {
   nodeEnv,
