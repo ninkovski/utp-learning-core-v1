@@ -1,10 +1,9 @@
-# Releases Plan – Mini LMS Backend
+﻿# Releases Plan - Mini LMS Backend
 
-## Política de releases
 - Estrategia: SemVer
-- Convención de tag: `vMAJOR.MINOR.PATCH`
-- Rama de documentación: `feature/0_documentacion`
-- Rama de integración final: `main`
+- Convencion de tag: `vMAJOR.MINOR.PATCH`
+- Rama de documentacion: `feature/0_documentacion`
+- Rama de integracion final: `main`
 
 ## v0.1.0 – Documentation Baseline
 Estado: Completed ✅
@@ -15,7 +14,7 @@ Objetivo:
 Entregables:
 - Documento base de requerimientos del reto.
 - Plan de releases e historias.
-- Matriz de trazabilidad HU → tareas → commits.
+- Matriz de trazabilidad HU -> tareas -> commits.
 
 Checklist de salida:
 - [x] Alcance CORE validado.
@@ -31,7 +30,7 @@ Objetivo:
 
 Entregables:
 - Estructura de proyecto.
-- Configuración de TypeScript, lint y test.
+- Configuracion de TypeScript, lint y test.
 - Manejo centralizado de errores.
 
 Checklist de salida:
@@ -44,31 +43,35 @@ Avance implementado en `feature/1_foundation`:
 - Configuración de ESLint, Prettier, Jest y Supertest.
 - Middleware centralizado de errores + 404.
 - Endpoint base `GET /` y `GET /api/health`.
-- Pruebas iniciales de healthcheck y not found.
-- 3 tests pasando (unit + integración).
+- 3 tests pasando (unit + integracion).
 
-## v0.3.0 – Auth + Courses
-Estado: In Progress 🔨
+## v0.3.0 - Auth + Courses
+Estado: In Progress
 Rama: `feature/2_auth-courses`
 
 Objetivo:
-- Login JWT y endpoints públicos de cursos.
+- Login JWT y endpoints publicos de cursos.
 
 Entregables:
-- Prisma + SQLite schema (usuarios/cursos/tareas)
-- Seed inicial de datos
-- `POST /auth/login`
-- `GET /courses`
-- `GET /courses/{id}`
-- JWT middleware para proteger `/me/**`
+- Prisma + SQLite schema (usuarios/cursos/tareas).
+- Seed inicial de datos.
+- `POST /api/auth/login`.
+- `GET /api/courses`.
+- `GET /api/courses/{id}`.
+- JWT middleware para proteger `/me/**`.
 
 Checklist de salida:
-- [ ] Token emitido para credenciales válidas.
-- [ ] Cursos seed disponibles (6–10).
-- [ ] Tareas seed por curso.
-- [ ] 401 y 404 consistentes.
+- [x] Token emitido para credenciales validas.
+- [x] Cursos seed disponibles (6-10).
+- [x] Tareas seed por curso.
+- [x] 401 consistente en `/api/me/profile` sin token.
+- [x] 404 consistente para rutas inexistentes.
 
-## v0.4.0 – Enrollments + Tasks Progress
+Evidencia:
+- Tests en verde: 7 passing.
+- Build TypeScript en verde.
+
+## v0.4.0 - Enrollments + Tasks Progress
 Estado: Planned
 
 Objetivo:
@@ -80,37 +83,37 @@ Entregables:
 - Marcar/desmarcar completado.
 
 Checklist de salida:
-- [ ] Sin duplicidad de inscripción.
+- [ ] Sin duplicidad de inscripcion.
 - [ ] Estado por usuario aislado.
 - [ ] Endpoints protegidos bajo `/me/**`.
 
-## v0.5.0 – Quality Gate
+## v0.5.0 - Quality Gate
 Estado: Planned
 
 Objetivo:
 - Demostrar robustez funcional con pruebas.
 
 Entregables:
-- Suite de 3–5 tests obligatorios.
-- README final de ejecución.
+- Suite de 3-5 tests obligatorios.
+- README final de ejecucion.
 
 Checklist de salida:
 - [ ] Tests obligatorios en verde.
 - [ ] Casos de error cubiertos.
-- [ ] Evidencia de ejecución incluida.
+- [ ] Evidencia de ejecucion incluida.
 
-## v0.6.0 – Cloud Delivery
+## v0.6.0 - Cloud Delivery
 Estado: Planned
 
 Objetivo:
-- Entrega pública para pruebas técnicas.
+- Entrega publica para pruebas tecnicas.
 
 Entregables:
 - Pipeline en GitHub Actions.
 - Deploy a Azure App Service.
-- URL pública de validación.
+- URL publica de validacion.
 
 Checklist de salida:
-- [ ] Build y test automáticos en CI.
+- [ ] Build y test automaticos en CI.
 - [ ] Deploy automatizado por branch/tag.
 - [ ] URL final documentada para evaluadores.

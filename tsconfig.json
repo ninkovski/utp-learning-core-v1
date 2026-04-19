@@ -6,7 +6,6 @@
     "rootDir": ".",
     "outDir": "dist",
     "strict": true,
-    "noEmit": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
@@ -14,6 +13,6 @@
     "sourceMap": true,
     "types": ["node", "jest"]
   },
-  "include": ["src", "tests", "jest.config.ts"],
+  "include": ["src", "tests", "prisma/**/*.ts", "jest.config.ts"],
   "exclude": ["dist", "node_modules"]
 }

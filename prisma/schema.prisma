@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String            @id @default(cuid())
+  email       String            @unique
+  password    String
+  name        String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  completions TaskCompletion[]
+}
+
+model Course {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tasks       Task[]
+}
+
+model Task {
+  id          String            @id @default(cuid())
+  courseId    String
+  title       String
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  course      Course            @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  completions TaskCompletion[]
+
+  @@index([courseId])
+}
+
+model TaskCompletion {
+  id        String   @id @default(cuid())
+  userId    String
+  taskId    String
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, taskId])
+  @@index([userId])
+  @@index([taskId])
+}
