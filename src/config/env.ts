@@ -10,6 +10,10 @@ function getEnvValue(key: 'NODE_ENV' | 'PORT' | 'JWT_SECRET' | 'DATABASE_URL', f
     throw new Error(`Missing required env var: ${key}`);
   }
 
+  if (!process.env[key]) {
+    process.env[key] = value;
+  }
+
   return value;
 }
 
