@@ -73,6 +73,7 @@ jobs:
     env:
       AZURE_WEBAPP_NAME: utp-learning-core-v1
       AZURE_RESOURCE_GROUP: utp-learning-core-v1_group
+      AZURE_WEBAPP_URL: https://utp-learning-core-v1-cnb0cubkcfd2heea.centralus-01.azurewebsites.net
 
     steps:
       - name: Download artifact from build job
@@ -127,3 +128,17 @@ jobs:
         with:
           inlineScript: |
             az webapp restart --name "$AZURE_WEBAPP_NAME" --resource-group "$AZURE_RESOURCE_GROUP"
+
+      - name: Smoke test health endpoint
+        run: |
+          for i in {1..12}; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" "$AZURE_WEBAPP_URL/api/health")
+            if [ "$code" = "200" ]; then
+              echo "Healthcheck OK"
+              exit 0
+            fi
+            echo "Healthcheck attempt $i failed (HTTP $code), retrying..."
+            sleep 10
+          done
+          echo "Healthcheck failed after retries"
+          exit 1

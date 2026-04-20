@@ -33,7 +33,7 @@ const nodeEnv = getEnvValue('NODE_ENV', isAzureAppService() ? 'production' : 'de
 
 export const env = {
   nodeEnv,
-  port: Number(getEnvValue('PORT', '3000')),
+  port: Number(getEnvValue('PORT', nodeEnv === 'production' ? '8080' : '3000')),
   jwtSecret: getEnvValue('JWT_SECRET', 'dev-secret-change-in-production'),
   databaseUrl: getEnvValue('DATABASE_URL', getDefaultDatabaseUrl(nodeEnv)),
   appVersion: process.env.APP_VERSION ?? packageJson.version,
