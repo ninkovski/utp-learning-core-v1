@@ -5,6 +5,7 @@ import morgan from 'morgan';
 
 import { errorHandler } from './common/middleware/error-handler';
 import { notFoundHandler } from './common/middleware/not-found';
+import { mountOpenApi } from './docs/openapi';
 import { apiRouter } from './routes';
 
 export const app = express();
@@ -21,5 +22,6 @@ app.get('/', (_req, res) => {
 });
 
 app.use('/api', apiRouter);
+mountOpenApi(app);
 app.use(notFoundHandler);
 app.use(errorHandler);
