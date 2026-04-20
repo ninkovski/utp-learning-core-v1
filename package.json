@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc -p tsconfig.build.json",
-    "prisma:generate": "prisma generate --schema=prisma/schema.prisma",
+    "prisma:generate": "node ./node_modules/prisma/build/index.js generate --schema=prisma/schema.prisma",
     "start": "npm run prisma:generate && node dist/server.js",
     "start:azure": "npm run prisma:generate && node dist/server.js",
     "test": "jest --config jest.config.ts --runInBand",
